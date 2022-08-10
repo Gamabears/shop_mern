@@ -6,7 +6,10 @@ import Home from './pages/Home';
 import Header from './components/Header';
 import Login from './pages/Login';
 import Register from './pages/Register';
-
+import NewTicket from './pages/NewTicket';
+import PrivateRouter from './components/PrivateRouter';
+import Tickets from './pages/Tickets';
+import Ticket from './pages/Ticket';
 function App() {
   return (
     <>
@@ -19,6 +22,19 @@ function App() {
           <Route path = '/' element = {<Home />} />
           <Route path = '/register' element = {<Register />} />
           <Route path = '/login' element = {<Login />} />
+          <Route path = '/new-ticket' element = {<PrivateRouter />} >
+              <Route path = '/new-ticket' element = {<NewTicket />} />
+          </Route>
+
+          <Route path = '/tickets' element = {<PrivateRouter />} >
+              <Route path = '/tickets' element = {<Tickets />} />
+          </Route>
+
+          <Route path = '/ticket/:ticketId' element = {<PrivateRouter />} >
+              <Route path = '/ticket/:ticketId'  element = {<Ticket />} />
+          </Route>
+
+
          
         </Routes>
       </div>

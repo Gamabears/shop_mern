@@ -7,7 +7,9 @@ const User = require('../models/userModel')
 const protect = asyncHandler(async (req,res,next)=>{
     let token
 
-    if(req.headers.authorization && req.header.authorization.startsWith('Bearer')){
+    if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith('Bearer')){
         try {
             //Get Token from header
             token = req.headers.authorization.split(' ')[1]
@@ -19,16 +21,15 @@ const protect = asyncHandler(async (req,res,next)=>{
             next()
         } catch (error) {
             console.log(error)
-            res.status(400)
-            throw new Error('Not authorized')
+           res.status(401)
+      throw new Error('Not authorized, token failed')
         }
     }
 
-    if (!token){
-            console.log(error)
-            res.status(400)
-            throw new Error('Not authorized')
-    }
-})
+    if (!token) {
+        res.status(401)
+        throw new Error('Not authorized, no token')
+      }
+    })
 
 module.exports ={protect} 
